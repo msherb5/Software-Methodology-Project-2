@@ -6,7 +6,7 @@ public class Profile {
         return fname;
     }
 
-    public void setFname(String newFName){
+    public void setFname(String newFName) {
         this.fname = newFName;
     }
 
@@ -14,7 +14,7 @@ public class Profile {
         return lname;
     }
 
-    public void setLname(String newLName){
+    public void setLname(String newLName) {
         this.lname = newLName;
     }
 
