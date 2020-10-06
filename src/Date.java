@@ -3,19 +3,29 @@ public class Date implements Comparable<Date> {
  private int month; 
  private int day; 
 
- public Date(int year, int month, int day){
-     this.year = year;
-     this.month = month;
-     this.day = day;
- }
+ //It returns a value less than 0 if this Date is before the Date argument
+ //It returns a value greater than 0 if this Date is after the Date argument
  public int compareTo(Date date) { 
-    if (!(date instanceof Date)){
-        return -1;
-    }else if (((Date) date).year == this.year && ((Date) date).month == this.month && ((Date)date).day == this.day) {
+    if (this.year > date.year) {
         return 1;
-    }else {
-        return 0;
+    }else if(this.year < date.year){
+        return -1;
+    }else if(this.year == date.year){
+        if(this.month > date.month){
+            return 1;
+        }else if(this.month < date.month){
+            return -1;
+        }else if(this.month == date.month){
+            if(this.day > date.day){
+                return 1;
+            }else if (this.day < date.day){
+                return -1;
+            }else if(this.day == date.day){
+                return 0;
+            }
+        }
     }
+    return 0;
  } //return 0, 1, or -1 
  public String toString() { 
      return (this.month + "/" + this.day + "/" + this.year);
