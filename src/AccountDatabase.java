@@ -80,7 +80,24 @@ public class AccountDatabase {
     }
 
  
-private void sortByDateOpen() { } //sort in ascending order 
+private void sortByDateOpen() { 
+    int count = accounts.length;
+    Account temp;
+
+    for (int i = 0; i < count; i++) 
+    {
+        for (int j = i + 1; j < count; j++) { 
+            if (this.accounts[i].getDateOpen().compareTo(this.accounts[j].getDateOpen()) > 0 ) 
+            {
+                temp = this.accounts[i];
+                this.accounts[i] = this.accounts[j];
+                this.accounts[j] = temp;
+            }
+        }
+    }
+
+
+} //sort in ascending order 
 private void sortByLastName() { 
     int count = accounts.length;
     Account temp;
