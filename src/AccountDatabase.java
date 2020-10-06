@@ -73,6 +73,9 @@ public class AccountDatabase {
         }
 
         account.debit(amount);
+        if(account.getClass().isInstance(MoneyMarket.class)){
+            ((MoneyMarket)account).addWithdrawals();
+        }
         return 0;
     }
 

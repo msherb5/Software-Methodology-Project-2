@@ -3,6 +3,12 @@ public abstract class Account {
     private double balance;
     private Date dateOpen;
 
+    public Account(String fname, String lname,double balance, Date dateOpen){
+        this.holder = new Profile(fname, lname);
+        this.balance = balance;
+        this.dateOpen = dateOpen;
+    }
+
     public void debit(double amount) {
         this.balance -= amount;
     } // decrease the balance by amount
@@ -11,9 +17,9 @@ public abstract class Account {
         this.balance += amount;
     } // increase the balance by amount
 
+    @Override
     public String toString() {
-        System.out.println("Profile: " + holder.getFname() + ", " + holder.getLname() + "Balance: " + balance + "Date: "
-                + date.toString());
+        return (this.holder.toString() + "* " + this.balance + this.dateOpen.toString());
     }
 
     public Profile getProfile(){
@@ -28,7 +34,7 @@ public abstract class Account {
         return this.dateOpen;
     }
 
-    public abstract double monthlyInterest() { }
+    public abstract double monthlyInterest();
 
-    public abstract double monthlyFee() { }
+    public abstract double monthlyFee();
 }
