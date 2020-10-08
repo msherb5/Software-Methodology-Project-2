@@ -27,11 +27,7 @@ class MoneyMarketTest {
         data.add(withdrawals);
 
 
-<<<<<<< HEAD
-        for(int numWithdraw = 0; numWithdraw < 7; numWithdraw++){
-=======
         for(int numWithdraw = 0; numWithdraw < 9; numWithdraw++){
->>>>>>> a659f958e277e50fe1d83245c3ad045dd58cd5b5
             data.withdrawal(withdrawals, 1);
 
         }

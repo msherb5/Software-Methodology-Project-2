@@ -88,7 +88,7 @@ public class AccountDatabase {
     }
 
     private void sortByDateOpen() {
-        int count = accounts.length;
+       
         Account temp;
 
         for (int i = 0; i < this.size; i++) {
