@@ -1,9 +1,18 @@
+/**
+ * Class to test the Money Market class.
+ * Checks monthly interest and monthly fee.
+ * @author Ben Plotnick, Michael Sherbine
+ */
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MoneyMarketTest {
 
+    /**
+     * Tests monthly Interest.
+     */
     @Test
     void monthlyInterest() {
         Date date = new Date(2020, 8,2);
@@ -13,6 +22,9 @@ class MoneyMarketTest {
 
     }
 
+    /**
+     * Tests monthly fee.
+     */
     @Test
     void monthlyFee() {
         Date date = new Date(2020, 8,2);
@@ -27,11 +39,7 @@ class MoneyMarketTest {
         data.add(withdrawals);
 
 
-<<<<<<< HEAD
-        for(int numWithdraw = 0; numWithdraw < 7; numWithdraw++){
-=======
         for(int numWithdraw = 0; numWithdraw < 9; numWithdraw++){
->>>>>>> a659f958e277e50fe1d83245c3ad045dd58cd5b5
             data.withdrawal(withdrawals, 1);
 
         }

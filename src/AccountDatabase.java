@@ -1,3 +1,9 @@
+/**
+ * Class to create and maintain Databases of accounts.
+ * Contains methods to find an account, add/remove an account, grow the database, deposit/withdrawal money, and sort/print all the accounts
+ * @author Ben Plotnick, Michael Sherbine
+ */
+
 public class AccountDatabase {
     private Account[] accounts;
     private int size;
@@ -7,6 +13,11 @@ public class AccountDatabase {
         this.size = 0;
     }
 
+    /**
+     * Finds specified account from database, or doesn't.
+     * @param account
+     * @return 1 if found, -1 if not found
+     */
     private int find(Account account) {
         String firstName = account.getProfile().getFname();
         String lastName = account.getProfile().getLname();
@@ -24,16 +35,29 @@ public class AccountDatabase {
 
     }
 
+    /**
+     * getter for database size
+     * @return this.size
+     */
     public int getSize() {
         return this.size;
     }
 
+    /**
+     * Adds 5 slots to the end of a database
+     */
     private void grow() {
         Account[] temp = new Account[this.size + 5];
         System.arraycopy(accounts, 0, temp, 0, size);
         this.accounts = temp;
     }
 
+    /**
+     * adds an account to a database. 
+     * doesn't if account already exists. 
+     * @param account
+     * @return true if account was added, false if account is already in database.
+     */
     public boolean add(Account account) {
         if (find(account) != -1) {
             return false;
@@ -48,6 +72,12 @@ public class AccountDatabase {
 
     } // return false if account exists
 
+    /**
+     * Removes given account from database.
+     * Doesn't if can't find account.
+     * @param account
+     * @return true if account was removed, false if account doesn't exist.
+     */
     public boolean remove(Account account) {
 
         int itemIndex = find(account);
@@ -60,6 +90,13 @@ public class AccountDatabase {
         return true;
     } // return false if account doesn’t exist
 
+    /**
+     * Makes a deposit for the given amount in the given account.
+     * Doesn't if the account doesn't exist in the database.
+     * @param account
+     * @param amount
+     * @return true if deposit made, false if account doesn't exist.
+     */
     public boolean deposit(Account account, double amount) {
         int accountIndex = find(account);
         if (accountIndex == -1) {
@@ -70,6 +107,13 @@ public class AccountDatabase {
     } // return 0: withdrawal successful, 1: insufficient funds, -1 account doesn’t
       // exist
 
+    /**
+     * Withdrawals the given amount from the given account
+     * Doesn't if there is not enough to withdrawal or account doesn't exist.
+     * @param account
+     * @param amount
+     * @return  0 if withdrawal successful, 1 if insufficient funds, -1 if account doesn’t exist
+     */  
     public int withdrawal(Account account, double amount) {
         int accountIndex = find(account);
         if (accountIndex == -1) {
@@ -87,6 +131,9 @@ public class AccountDatabase {
         return 0;
     }
 
+    /**
+     * Sorts accounts in ascending order by the date they were opened
+     */
     private void sortByDateOpen() {
         int count = accounts.length;
         Account temp;
@@ -104,6 +151,9 @@ public class AccountDatabase {
 
     } // sort in ascending order
 
+    /**
+     * Sorts accounts alphabetically by last name.
+     */
     private void sortByLastName() {
         Account temp;
 
@@ -121,6 +171,9 @@ public class AccountDatabase {
 
  // sort in ascending order
 
+/**
+ * Prints accounts in ascending order by date opened.
+ */
     public void printByDateOpen() {
         sortByDateOpen();
         for (int i = 0; i < this.size; i++) {
@@ -132,6 +185,9 @@ public class AccountDatabase {
         }
     }
 
+/**
+ * Prints accounts in alphabetical order by last name.
+ */
     public void printByLastName() {
 
         sortByLastName();
@@ -145,6 +201,9 @@ public class AccountDatabase {
 
     }
 
+/**
+ * Prints accounts.
+ */
     public void printAccounts() {
         for (int i = 0; i < this.size; i++) {
             System.out.println(this.accounts[i].toString());

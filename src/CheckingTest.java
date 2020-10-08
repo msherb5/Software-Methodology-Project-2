@@ -1,7 +1,16 @@
+/**
+ * Class to test the checking class.
+ * Checks monthly interest and monthly fee.
+ * @author Ben Plotnick, Michael Sherbine
+ */
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CheckingTest {
 
+    /**
+     * tests monthly interest.
+     */
     @org.junit.jupiter.api.Test
     void monthlyInterest() {
         Date date = new Date(1999,12,5);
@@ -9,6 +18,9 @@ class CheckingTest {
         assertEquals((300 * (.0005/12)), account.monthlyInterest());
     }
 
+    /**
+     * Tests monthly fee.
+     */
     @org.junit.jupiter.api.Test
     void monthlyFee() {
         Date date = new Date(1999,12,5);
