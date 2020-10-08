@@ -120,12 +120,19 @@ public void printByDateOpen() {
     sortByDateOpen();
     for(int i = 0; i < this.accounts.length-1; i++){
         System.out.println(this.accounts[i].toString());
+        System.out.println("-interest: $ " + this.accounts[i].monthlyInterest());
+        System.out.println("-fee: $ " + this.accounts[i].monthlyFee());
+        System.out.println("-new balance: $ " + (this.accounts[i].getBalance() + this.accounts[i].monthlyInterest() - this.accounts[i].monthlyFee()));
     }
  } 
 public void printByLastName() {
+    
     sortByLastName();
     for(int i = 0; i < this.accounts.length-1; i++){
         System.out.println(this.accounts[i].toString());
+        System.out.println("-interest: $ " + this.accounts[i].monthlyInterest());
+        System.out.println("-fee: $ " + this.accounts[i].monthlyFee());
+        System.out.println("-new balance: $ " + (this.accounts[i].getBalance() + this.accounts[i].monthlyInterest() - this.accounts[i].monthlyFee()));
     }
 
 
@@ -133,6 +140,10 @@ public void printByLastName() {
 public void printAccounts() {
     for(int i = 0; i < this.accounts.length-1; i++){
         System.out.println(this.accounts[i].toString());
+        System.out.println("-interest: $ " + this.accounts[i].monthlyInterest());
+        System.out.println("-fee: $ " + this.accounts[i].monthlyFee());
+        System.out.println("-new balance: $ " + (this.accounts[i].getBalance() + this.accounts[i].monthlyInterest() - this.accounts[i].monthlyFee()));
+        
     }
  } 
 }
