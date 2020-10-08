@@ -119,11 +119,11 @@ public class AccountDatabase {
 
     } // sort in ascending order
 
-} // sort in ascending order
+ // sort in ascending order
 
     public void printByDateOpen() {
         sortByDateOpen();
-        for (int i = 0; i < this.accounts.length - 1; i++) {
+        for (int i = 0; i < this.size; i++) {
             System.out.println(this.accounts[i].toString());
             System.out.println("-interest: $ " + this.accounts[i].monthlyInterest());
             System.out.println("-fee: $ " + this.accounts[i].monthlyFee());
@@ -135,7 +135,7 @@ public class AccountDatabase {
     public void printByLastName() {
 
         sortByLastName();
-        for (int i = 0; i < this.accounts.length - 1; i++) {
+        for (int i = 0; i < this.size; i++) {
             System.out.println(this.accounts[i].toString());
             System.out.println("-interest: $ " + this.accounts[i].monthlyInterest());
             System.out.println("-fee: $ " + this.accounts[i].monthlyFee());
@@ -146,7 +146,7 @@ public class AccountDatabase {
     }
 
     public void printAccounts() {
-        for (int i = 0; i < this.accounts.length - 1; i++) {
+        for (int i = 0; i < this.size; i++) {
             System.out.println(this.accounts[i].toString());
             
         }
