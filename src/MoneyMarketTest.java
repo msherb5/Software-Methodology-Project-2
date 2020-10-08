@@ -1,7 +1,8 @@
 /**
  * Class to test the Money Market class.
  * Checks monthly interest and monthly fee.
- * @author Ben Plotnick, Michael Sherbine
+ * @author Ben Plotnick
+ * @author Michael Sherbine
  */
 
 import org.junit.jupiter.api.Test;

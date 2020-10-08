@@ -28,6 +28,7 @@ public class TransactionManager {
             }
 
         }
+        myObj.close();
     }
 
     /**
