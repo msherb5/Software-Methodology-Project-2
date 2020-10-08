@@ -1,3 +1,9 @@
+
+/**
+ * Class to detail creating a savings account.
+ * Contains a constructor for a savings account, override methods to compute interest and fees, getter and setter for loyalty, and a method to print the savings to a string.
+ * @author Ben Plotnick, Michael Sherbine
+ */
 public class Savings extends Account {
   private boolean isLoyal;
 
@@ -10,6 +16,11 @@ public class Savings extends Account {
     this.isLoyal = isLoyal;
   }
 
+  /**
+   * Computes monthly interest on a given balance
+   * Based on if the member is loyal or not.
+   * @return the monthly interest rate.
+   */
   @Override
   public double monthlyInterest() {
     double currentBalance = getBalance();
@@ -20,6 +31,11 @@ public class Savings extends Account {
     return currentBalance * (0.0025 / 12);
   }
 
+  /**
+   * Computes monthly fee on a given balance
+   * Based on if the account has a balance of 300 or greater, or less.
+   * @return the monthly fee.
+   */
   @Override
   public double monthlyFee() {
     if (getBalance() >= 300) {
@@ -28,15 +44,27 @@ public class Savings extends Account {
     return 5;
   }
 
+
+  /**
+   * Getter for isLoyal.
+   * @return whether ot not the customer is loyal.
+   */
   public boolean getLoyal() {
     return isLoyal;
   }
 
-  // Setter
+  /**
+   * Setter for isLoyal.
+   * @param newLoyal
+   */
   public void setLoyal(boolean newLoyal) {
     this.isLoyal = newLoyal;
   }
 
+  /**
+   * Prints the given savings account to a string.
+   * @return Concatenated string with all of the savings account details.
+   */
   @Override
   public String toString() {
     String specialSavings;
