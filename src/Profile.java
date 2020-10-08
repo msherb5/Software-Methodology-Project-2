@@ -2,8 +2,7 @@ public class Profile {
     private String fname;
     private String lname;
 
-
-    public Profile(String fname, String lname){
+    public Profile(String fname, String lname) {
         this.fname = fname;
         this.lname = lname;
     }
@@ -24,9 +23,8 @@ public class Profile {
         this.lname = newLName;
     }
 
-    public String toString(){
-        return "*"+this.fname + " " + this.lname + "*";
+    public String toString() {
+        return "*" + this.fname + " " + this.lname + "*";
     }
-
 
 }

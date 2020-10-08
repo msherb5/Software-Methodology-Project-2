@@ -3,7 +3,11 @@ public abstract class Account {
     private double balance;
     private Date dateOpen;
 
-    public Account(String fname, String lname,double balance, Date dateOpen){
+    public Account(String fname, String lname) {
+        this.holder = new Profile(fname, lname);
+    }
+
+    public Account(String fname, String lname, double balance, Date dateOpen) {
         this.holder = new Profile(fname, lname);
         this.balance = balance;
         this.dateOpen = dateOpen;
@@ -19,18 +23,18 @@ public abstract class Account {
 
     @Override
     public String toString() {
-        return (this.holder.toString() + "* " + this.balance + this.dateOpen.toString());
+        return (this.holder.toString() + "* " + String.format("%.2f", this.balance) + " " + this.dateOpen.toString());
     }
 
-    public Profile getProfile(){
+    public Profile getProfile() {
         return this.holder;
     }
 
-    public double getBalance(){
+    public double getBalance() {
         return this.balance;
     }
 
-    public Date getDateOpen(){
+    public Date getDateOpen() {
         return this.dateOpen;
     }
 

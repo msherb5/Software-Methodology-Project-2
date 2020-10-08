@@ -7,20 +7,26 @@ public class AccountDatabase {
         this.size = 0;
     }
 
- private int find(Account account) {
-     String firstName = account.getProfile().getFname();
-     String lastName = account.getProfile().getLname();
+    private int find(Account account) {
+        String firstName = account.getProfile().getFname();
+        String lastName = account.getProfile().getLname();
 
-     for (int i = 0; i < this.size; i++) {
-         String fname = (this.accounts[i].getProfile()).getFname();
-         String lname = (this.accounts[i].getProfile()).getLname();
-        if (fname.equals(firstName) && lname.equals(lastName) && (account.getClass()).isInstance(this.accounts[i].getClass())){
-            return i;
+        for (int i = 0; i < this.size; i++) {
+            String fname = (this.accounts[i].getProfile()).getFname();
+            String lname = (this.accounts[i].getProfile()).getLname();
+            if (fname.equalsIgnoreCase(firstName) && lname.equalsIgnoreCase(lastName)
+                    && ((account.getClass().getName()).equals(this.accounts[i].getClass().getName()))) {
+                return i;
+            }
         }
+
+        return -1;
+
     }
-    
-    return -1;
-  }
+
+    public int getSize() {
+        return this.size;
+    }
 
     private void grow() {
         Account[] temp = new Account[this.size + 5];
@@ -55,95 +61,99 @@ public class AccountDatabase {
     } // return false if account doesn’t exist
 
     public boolean deposit(Account account, double amount) {
-        if (find(account) == -1) {
+        int accountIndex = find(account);
+        if (accountIndex == -1) {
             return false;
         }
-        account.credit(amount);
+        accounts[accountIndex].credit(amount);
         return true;
     } // return 0: withdrawal successful, 1: insufficient funds, -1 account doesn’t
       // exist
 
     public int withdrawal(Account account, double amount) {
-        if (find(account) == -1) {
+        int accountIndex = find(account);
+        if (accountIndex == -1) {
             return -1;
         }
 
-        if (account.getBalance() < amount) {
+        if (amount > this.accounts[accountIndex].getBalance()) {
             return 1;
         }
 
-        account.debit(amount);
-        if(account.getClass().isInstance(MoneyMarket.class)){
-            ((MoneyMarket)account).addWithdrawals();
+        this.accounts[accountIndex].debit(amount);
+        if (account.getClass().getName().equals(MoneyMarket.class.getName())) {
+            ((MoneyMarket) accounts[accountIndex]).addWithdrawals();
         }
         return 0;
     }
 
- 
-private void sortByDateOpen() { 
-    int count = accounts.length;
-    Account temp;
+    private void sortByDateOpen() {
+        int count = accounts.length;
+        Account temp;
 
-    for (int i = 0; i < count; i++) 
-    {
-        for (int j = i + 1; j < count; j++) { 
-            if (this.accounts[i].getDateOpen().compareTo(this.accounts[j].getDateOpen()) > 0 ) 
-            {
-                temp = this.accounts[i];
-                this.accounts[i] = this.accounts[j];
-                this.accounts[j] = temp;
+        for (int i = 0; i < this.size; i++) {
+            for (int j = i + 1; j < this.size; j++) {
+                if (this.accounts[i].getDateOpen().compareTo(this.accounts[j].getDateOpen()) > 0) {
+                    temp = this.accounts[i];
+                    this.accounts[i] = this.accounts[j];
+                    this.accounts[j] = temp;
+
+                }
             }
+        }
+
+    } // sort in ascending order
+
+    private void sortByLastName() {
+        Account temp;
+
+        for (int i = 0; i < this.size; i++) {
+            for (int j = i + 1; j < this.size; j++) {
+                if (this.accounts[i].getProfile().getLname().compareTo(this.accounts[j].getProfile().getLname()) > 0) {
+                    temp = this.accounts[i];
+                    this.accounts[i] = this.accounts[j];
+                    this.accounts[j] = temp;
+                }
+            }
+        }
+
+    } // sort in ascending order
+
+} // sort in ascending order
+
+    public void printByDateOpen() {
+        sortByDateOpen();
+        for (int i = 0; i < this.accounts.length - 1; i++) {
+            System.out.println(this.accounts[i].toString());
+            System.out.println("-interest: $ " + this.accounts[i].monthlyInterest());
+            System.out.println("-fee: $ " + this.accounts[i].monthlyFee());
+            System.out.println("-new balance: $ " + (this.accounts[i].getBalance() + this.accounts[i].monthlyInterest()
+                    - this.accounts[i].monthlyFee()));
         }
     }
 
+    public void printByLastName() {
 
-} //sort in ascending order 
-private void sortByLastName() { 
-    int count = accounts.length;
-    Account temp;
-
-    for (int i = 0; i < count; i++) 
-    {
-        for (int j = i + 1; j < count; j++) { 
-            if (this.accounts[i].getProfile().getLname().compareTo(this.accounts[j].getProfile().getLname())>0) 
-            {
-                temp = this.accounts[i];
-                this.accounts[i] = this.accounts[j];
-                this.accounts[j] = temp;
-            }
+        sortByLastName();
+        for (int i = 0; i < this.accounts.length - 1; i++) {
+            System.out.println(this.accounts[i].toString());
+            System.out.println("-interest: $ " + this.accounts[i].monthlyInterest());
+            System.out.println("-fee: $ " + this.accounts[i].monthlyFee());
+            System.out.println("-new balance: $ " + (this.accounts[i].getBalance() + this.accounts[i].monthlyInterest()
+                    - this.accounts[i].monthlyFee()));
         }
+
     }
 
+    public void printAccounts() {
+        for (int i = 0; i < this.accounts.length - 1; i++) {
+            System.out.println(this.accounts[i].toString());
+            System.out.println("-interest: $ " + this.accounts[i].monthlyInterest());
+            System.out.println("-fee: $ " + this.accounts[i].monthlyFee());
+            System.out.println("-new balance: $ " + (this.accounts[i].getBalance() + this.accounts[i].monthlyInterest()
+                    - this.accounts[i].monthlyFee()));
 
-} //sort in ascending order 
-public void printByDateOpen() {
-    sortByDateOpen();
-    for(int i = 0; i < this.accounts.length-1; i++){
-        System.out.println(this.accounts[i].toString());
-        System.out.println("-interest: $ " + this.accounts[i].monthlyInterest());
-        System.out.println("-fee: $ " + this.accounts[i].monthlyFee());
-        System.out.println("-new balance: $ " + (this.accounts[i].getBalance() + this.accounts[i].monthlyInterest() - this.accounts[i].monthlyFee()));
-    }
- } 
-public void printByLastName() {
-    
-    sortByLastName();
-    for(int i = 0; i < this.accounts.length-1; i++){
-        System.out.println(this.accounts[i].toString());
-        System.out.println("-interest: $ " + this.accounts[i].monthlyInterest());
-        System.out.println("-fee: $ " + this.accounts[i].monthlyFee());
-        System.out.println("-new balance: $ " + (this.accounts[i].getBalance() + this.accounts[i].monthlyInterest() - this.accounts[i].monthlyFee()));
-    }
+        }
 
-
- } 
-public void printAccounts() {
-    for(int i = 0; i < this.accounts.length-1; i++){
-        System.out.println(this.accounts[i].toString());
-        System.out.println("-interest: $ " + this.accounts[i].monthlyInterest());
-        System.out.println("-fee: $ " + this.accounts[i].monthlyFee());
-        System.out.println("-new balance: $ " + (this.accounts[i].getBalance() + this.accounts[i].monthlyInterest() - this.accounts[i].monthlyFee()));
-        
     }
- } 
 }
