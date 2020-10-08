@@ -1,7 +1,8 @@
 
 /**
- Transaction Manager class handles input and output
- @author Ben Plotnick, Michael Sherbine
+ * Transaction Manager class handles input and output
+ * @author Ben Plotnick
+ * @author Michael Sherbine
  **/
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -9,6 +10,9 @@ import java.util.Scanner;
 public class TransactionManager {
     AccountDatabase database = new AccountDatabase();
 
+    /**
+     * method to run  program
+     */
     public void run() {
 
         Scanner myObj = new Scanner(System.in);
@@ -26,12 +30,16 @@ public class TransactionManager {
         }
     }
 
-    public void handleInput(String[] input) throws Exception {
+    /**
+     * Handles input from user
+     * @param input to be processed
+     */
+    public void handleInput(String[] input) {
         String error = "Input data type mismatch";
         String accountDoesNotExist = "Account does not exist";
         String command = input[0];
-        if (command.equals("OC")) {
-            if (input.length != 6 || (!(input[5].equalsIgnoreCase("true")) && !(input[5].equalsIgnoreCase("false")))) {
+        if (command.equals("OC")) {// open Checking account
+            if (input.length != 6 || (!(input[5].equalsIgnoreCase("true")) && !(input[5].equalsIgnoreCase("false")))) {//check if input is less than expected and if last word is a boolean
                 throw new InputMismatchException(error);
             }
             checkAccountFormat(input);
@@ -49,7 +57,7 @@ public class TransactionManager {
                 System.out.println("Account opened and added to the database");
             }
 
-        } else if (command.equals("OS")) {
+        } else if (command.equals("OS")) {//Open savings account
             if (input.length != 6 || (!(input[5].equalsIgnoreCase("true")) && !(input[5].equalsIgnoreCase("false")))) {
                 throw new InputMismatchException(error);
             }
@@ -68,7 +76,7 @@ public class TransactionManager {
                 System.out.println("Account opened and added to the database");
             }
 
-        } else if (command.equals("OM")) {
+        } else if (command.equals("OM")) { // Open money market account
             if (input.length < 5) {
                 throw new InputMismatchException(error);
             }
@@ -86,7 +94,7 @@ public class TransactionManager {
             } else {
                 System.out.println("Account opened and added to the database");
             }
-        } else if (command.equals("CC")) {
+        } else if (command.equals("CC")) { // Close checking account
             if (input.length < 3) {
                 throw new InputMismatchException(error);
             }
@@ -96,7 +104,7 @@ public class TransactionManager {
             } else {
                 System.out.println("Account does not exist");
             }
-        } else if (command.equals("CS")) {
+        } else if (command.equals("CS")) {// close savings account
             if (input.length < 3) {
                 throw new InputMismatchException(error);
             }
@@ -106,7 +114,7 @@ public class TransactionManager {
             } else {
                 System.out.println("Account does not exist");
             }
-        } else if (command.equals("CM")) {
+        } else if (command.equals("CM")) { //close money market account
             if (input.length < 5) {
                 throw new InputMismatchException(error);
             }
@@ -116,7 +124,7 @@ public class TransactionManager {
             } else {
                 System.out.println("Account does not exist");
             }
-        } else if (command.equals("DC")) {
+        } else if (command.equals("DC")) { // Deposit to checking
             if (input.length < 4) {
                 throw new InputMismatchException(error);
             }
@@ -132,7 +140,7 @@ public class TransactionManager {
                 System.out.println(input[3] + " deposited to account");
             }
 
-        } else if (command.equals("DS")) {
+        } else if (command.equals("DS")) { //deposit to savings account
             if (input.length < 4) {
                 throw new InputMismatchException(error);
             }
@@ -148,7 +156,7 @@ public class TransactionManager {
                 System.out.println(input[3] + " deposited to account");
             }
 
-        } else if (command.equals("DM")) {
+        } else if (command.equals("DM")) { //deposit to money market account
             if (input.length < 4) {
                 throw new InputMismatchException(error);
             }
@@ -164,7 +172,7 @@ public class TransactionManager {
                 System.out.println(input[3] + " deposited to account");
             }
 
-        } else if (command.equals("WC")) {
+        } else if (command.equals("WC")) {//withdraw from checking account
             if (input.length < 4) {
                 throw new InputMismatchException(error);
             }
@@ -182,7 +190,7 @@ public class TransactionManager {
             } else {
                 System.out.println(input[3] + " withdrawn from account.");
             }
-        } else if (command.equals("WS")) {
+        } else if (command.equals("WS")) { // withdraw from savings account
             if (input.length < 4) {
                 throw new InputMismatchException(error);
             }
@@ -200,7 +208,7 @@ public class TransactionManager {
             } else {
                 System.out.println(input[3] + " withdrawn from account.");
             }
-        } else if (command.equals("WM")) {
+        } else if (command.equals("WM")) { // withdraw from money market account
             if (input.length < 4) {
                 throw new InputMismatchException(error);
             }
@@ -218,18 +226,22 @@ public class TransactionManager {
             } else if (withdraw == 0) {
                 System.out.println(input[3] + " withdrawn from account.");
             }
-        } else if (command.equals("PA")) {
+        } else if (command.equals("PA")) {//print all
             database.printAccounts();
-        } else if (command.equals("PD")) {
+        } else if (command.equals("PD")) {//print by date
             database.printByDateOpen();
-        } else if (command.equals("PN")) {
+        } else if (command.equals("PN")) { //print by name
             database.printByLastName();
         } else {
-            throw new InputMismatchException("Command " + "'" + command + "' not supported!");
+            throw new InputMismatchException("Command " + "'" + command + "' not supported!"); // if command is not valid throw exception
         }
 
     }
 
+    /**
+     * checks if the input entered is valid when opening an account
+     * @param input
+     */
     public void checkAccountFormat(String[] input) {
         try {
             Double.parseDouble(input[3]);

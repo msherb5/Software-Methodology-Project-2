@@ -1,16 +1,34 @@
+/**
+ Date class to create a Date
+ @author Ben Plotnick, Michael Sherbine
+ */
 public class Date implements Comparable<Date> {
     private int year;
     private int month;
     private int day;
 
+    /**
+     * Constructor to create a date
+     * @param year
+     * @param month
+     * @param day
+     */
     public Date(int year, int month, int day) {
         this.year = year;
         this.day = day;
         this.month = month;
     }
 
-    // It returns a value less than 0 if this Date is before the Date argument
-    // It returns a value greater than 0 if this Date is after the Date argument
+    
+    /**
+     * Compares 2 dates to see which is greater
+     * @param date to be compared
+     * @return 0 if the same
+     * @return 1 if this.date is greater
+     * @return -1 if this.date is smaller
+     */
+
+    @Override
     public int compareTo(Date date) {
         if (this.year > date.year) {
             return 1;
@@ -57,7 +75,12 @@ public class Date implements Comparable<Date> {
             return false;
         }
     }
-
+    /**
+     * Checks if a given year is a leap year
+     * @param year
+     * @return true if leap year
+     * @return false if not a leap year
+     */
     public boolean isLeap(int year) {
 
         if (year % 4 == 0) {

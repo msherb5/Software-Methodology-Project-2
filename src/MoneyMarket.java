@@ -1,16 +1,38 @@
+/**
+ * Date class to create a Date
+ *@author Ben Plotnick
+ *@author Michael Sherbine
+ */
 public class MoneyMarket extends Account {
   private int withdrawals;
 
+  /**
+   * Constructor to create money market account for searching
+   * @param fname
+   * @param lname
+   */
   public MoneyMarket(String fname, String lname) {
     super(fname, lname);
   }
 
+  /**
+   * Constructor to create money market account
+   * @param openDate
+   * @param balance
+   * @param lname
+   * @param fname
+   */
   public MoneyMarket(Date openDate, double balance, String lname, String fname) {
 
     super(fname, lname, balance, openDate);
 
   }
 
+
+  /**
+   * Calculate monthly interest
+   * @return monthlyinterest
+   */
   @Override
   public double monthlyInterest() {
     double currentBalance = getBalance();
@@ -18,6 +40,10 @@ public class MoneyMarket extends Account {
     return currentBalance * (.0065 / 12);
   }
 
+   /**
+   * Calculate monthly fee
+   * @return monthly fee
+   */
   @Override
   public double monthlyFee() {
     if (this.withdrawals > 6 || getBalance() < 2500) {
@@ -26,15 +52,25 @@ public class MoneyMarket extends Account {
     return 0;
   }
 
+  /**
+   * 
+   * @return withdrawals
+   */
   public int getWithdrawals() {
     return withdrawals;
   }
 
-  // Setter
+  /**
+   * Setter for withdrawals
+   * @param newWithdrawals new number of withdrawals
+   */
   public void setWithdrawals(int newWithdrawals) {
     this.withdrawals = newWithdrawals;
   }
 
+  /**
+   * Increase number of withdrawals by 1
+   */
   public void addWithdrawals() {
     this.withdrawals++;
   }
