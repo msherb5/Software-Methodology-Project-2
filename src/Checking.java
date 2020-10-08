@@ -10,6 +10,7 @@ public class Checking extends Account {
     this.directDeposit = directDeposit;
   }
 
+
   public boolean getDeposit() {
     return directDeposit;
   }
