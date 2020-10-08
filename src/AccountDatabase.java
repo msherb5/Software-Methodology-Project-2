@@ -135,7 +135,7 @@ public class AccountDatabase {
      * Sorts accounts in ascending order by the date they were opened
      */
     private void sortByDateOpen() {
-        int count = accounts.length;
+       
         Account temp;
 
         for (int i = 0; i < this.size; i++) {
